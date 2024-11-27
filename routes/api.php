@@ -4,6 +4,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\LikeController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/register', [AuthController::class, 'register']);
@@ -24,4 +25,10 @@ Route::middleware('auth:sanctum')->group(function () {
   Route::post('/posts/{post_id}/comments', [CommentController::class, 'store']);
   Route::put('/comments/{id}', [CommentController::class, 'update']);
   Route::delete('/comments/{id}', [CommentController::class, 'destroy']);
+
+  // Like enpoints
+  Route::post('/posts/{post_id}/like', [LikeController::class, 'likePost']);
+  Route::delete('/posts/{post_id}/like', [LikeController::class, 'unlikePost']);
+  Route::post('/comments/{comment_id}/like', [LikeController::class, 'likeComment']);
+  Route::delete('/comments/{comment_id}/like', [LikeController::class, 'unlikePost']);
 });
